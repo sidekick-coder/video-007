@@ -1,14 +1,40 @@
 <script setup>
-import Logo from './assets/logo.svg?raw'
+import DataTable from  './components/DataTable.vue'
+
+const columns = [
+  { label: 'Name', field: 'name' },
+  { label: 'Age', field: 'age' },
+  { label: 'Job', field: 'job' },
+]
+
+const rows = []
+
+for (let i = 0; i < 10; i++) {
+  rows.push({
+    name: 'item-' + i,
+    age: 'age-' + i,
+    job: 'job-' + i,
+  })
+  
+}
+
 </script>
 <template>
-  <div class="h-screen w-screen flex items-center justify-center bg-gray-900 text-white" >
-    <div class="text-center">
-      <div v-html="Logo" class="w-32 h-32 mx-auto" />
-
-      <div class="text-xl">
-        Sidekick-coder template
+  <div class="h-screen w-screen flex items-center justify-center bg-gray-900" >
+    <div class=" bg-white p-5 w-[500px] min-h-[300px] rounded">
+      <div class="text-xl mb-4">
+        Data table
       </div>
+
+      <data-table :columns="columns" :rows="rows">
+
+        <template #row-name="{ row, attrs }">
+          <td class="text-purple-500" v-bind="attrs" >
+            {{ row['name'] }}
+          </td>
+        </template>
+
+      </data-table>
 
     </div>
   </div>
